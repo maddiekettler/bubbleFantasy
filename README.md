@@ -1,2 +1,34 @@
 # bubbleFantasy
-Interactive bubble popping program
+
+Project 2 for ARTS 4090: Art & Code & Interactivity at Rensselaer Polytechnic
+Institute
+Instructor: Shawn Lawson
+
+## About
+
+In this program, "bubbles" are randomly generated about once every second at the
+top of the user's screen. Participants can stand in front of the camera and try
+to "pop" the bubbles. Determining whether a bubble is popped or not is based on
+movement: the difference between two frames of video are calculated, and if a
+bubble overlaps with the movement, it is "popped", or removed from the drawing.
+
+## Inspiration
+
+I was largely inspired by _Text Rain_, an interactive installation by Camille
+Utterback and Romy Achituv. In _Text Rain_, falling letters land on anything
+darker than a certain threshold and fall when that obstacle is removed. I used a
+similar approach with my program.
+
+## In Progress
+
+Unfortunately, while some of the bubbles pop when they're supposed to (when there
+is movement in the space the bubble occupies), others will refuse to pop. I will
+continue debugging and wondering why my code likes making my life harder than it
+needs to be.
+
+## Title
+
+In keeping with the music theme of project names, bubbleFantasy is a play on
+John Lennon and Yoko Ono's album _Double Fantasy_, originally released 17
+November 1980. Lennon would be murdered exactly three weeks later on 8 December
+1980.
