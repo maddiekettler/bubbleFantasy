@@ -95,7 +95,7 @@ void ofApp::draw() {
 	}
 }
 
-//--------------------------------------------------------------
+//Spacebar clears the bubbles if you feel like it
 void ofApp::keyPressed(int key) {
 	if (key == ' ') {
 		bubbles.clear();
