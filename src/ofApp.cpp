@@ -48,11 +48,13 @@ void ofApp::setup() {
 	vidGrabber.setVerbose(true);
 	vidGrabber.setDeviceID(0);
 	vidGrabber.setDesiredFrameRate(30);
-	vidGrabber.initGrabber(ofGetWidth(), ofGetHeight());
+	vidGrabber.initGrabber(1280, 720);
 
-	previous.allocate(ofGetWidth(), ofGetHeight());
-	current.allocate(ofGetWidth(), ofGetHeight());
-	forDrawing.allocate(ofGetWidth(), ofGetHeight());
+	colorImg.allocate(1280, 720);
+	previous.allocate(1280, 720);
+	current.allocate(1280, 720);
+	difference.allocate(1280, 720);
+	forDrawing.allocate(1280, 720);
 	forDrawing.setFromPixels(vidGrabber.getPixelsRef());
 }
 
