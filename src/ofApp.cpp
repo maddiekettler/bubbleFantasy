@@ -26,7 +26,7 @@ bool Bubble::isRemoved(ofxCvGrayscaleImage refImg, ofPixels pixels) {
 			// changed line of code: it seems to have a problem with y* width of ref img
 			// because if it is just y + x, code runs fine
 			// if (pixels.getColor((y*refImg.getWidth())+x).getLightness() > 150) {
-			if (pixels.getColor((y)+x).getLightness() > 150) {
+			if (pixels.getColor(y+x).getLightness() > 150) {
 				movementAmt++;
 			}
 		}
