@@ -10,15 +10,23 @@ Bubble::Bubble() {
 	color.g = 199;
 	color.b = 255;
 	radius = 30;
+	// variables usedful for isRemoved
+	leftX = position.x - (radius / 2);
+	topY = position.y - (radius / 2);
+	rightX = position.x + (radius / 2);
+	bottomY = position.y + (radius / 2);
 }
 
 //determines whether bubble stays or goes
 bool Bubble::isRemoved(ofxCvGrayscaleImage refImg, ofPixels pixels) {
 	int movementAmt = 0;
 	pixels = refImg.getPixels();
-	for (int y = position.y - (radius / 2); y < position.y + (radius / 2); y++) {
-		for (int x = position.x - (radius / 2); x < position.x + (radius / 2); x++) {
-			if (pixels.getColor(y + x).getBrightness() > 100) {
+	for (int y = topY; y < bottomY; y++) {
+		for (int x = leftX; x < rightX; x++) {
+			// changed line of code: it seems to have a problem with y* width of ref img
+			// because if it is just y + x, code runs fine
+			// if (pixels.getColor((y*refImg.getWidth())+x).getLightness() > 150) {
+			if (pixels.getColor((y)+x).getLightness() > 150) {
 				movementAmt++;
 			}
 		}
@@ -44,10 +52,13 @@ void ofApp::setup() {
 
 	previous.allocate(ofGetWidth(), ofGetHeight());
 	current.allocate(ofGetWidth(), ofGetHeight());
+	forDrawing.allocate(ofGetWidth(), ofGetHeight());
+	forDrawing.setFromPixels(vidGrabber.getPixelsRef());
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
+	forDrawing.setFromPixels(vidGrabber.getPixelsRef());
 	colorImg.setFromPixels(vidGrabber.getPixelsRef());
 	previous = colorImg;
 	vidGrabber.update();
@@ -76,13 +87,16 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-	vidGrabber.draw(0,0);
-
+	forDrawing.setFromPixels(vidGrabber.getPixelsRef());
+	forDrawing.mirror(false, true);
+	forDrawing.draw(0, 0);
+	
 	int frameNum = ofGetFrameNum();
 	if (frameNum % 30 == 0) {
 		Bubble bubble;
 		ofDrawCircle(bubble.position.x, bubble.position.y, bubble.radius);
 		ofSetColor(bubble.color);
+		ofSetLineWidth(5);
 		ofNoFill();
 		//add bubble to bubbles vector
 		bubbles.push_back(bubble);

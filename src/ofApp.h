@@ -11,6 +11,7 @@ public:
 	ofVec2f position;
 	ofColor color;
 	int radius;
+	int leftX, topY, rightX, bottomY;
 
 	bool isRemoved(ofxCvGrayscaleImage refImg, ofPixels pixels);
 };
@@ -30,7 +31,7 @@ public:
 	ofVideoGrabber vidGrabber;
 	int camWidth, camHeight;
 
-	ofxCvColorImage colorImg;
+	ofxCvColorImage colorImg, forDrawing;
 	ofxCvGrayscaleImage current, previous, difference;
 
 	ofPixels pixels;
