@@ -10,7 +10,7 @@ Bubble::Bubble() {
 	color.g = 199;
 	color.b = 255;
 	radius = 30;
-
+}
 
 //--------------------------------------------------------------
 void ofApp::setup() {
@@ -70,8 +70,7 @@ void ofApp::update() {
 			bubbles.erase((bubbles.begin() + i));
 			bubblePop2.play();
 			--i; //make sure you don't skip over a bubble
-		}
-		else {
+		} else {
 			bubbles[i].position.y += 3;
 		}
 	}
