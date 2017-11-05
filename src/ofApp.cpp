@@ -14,7 +14,7 @@ Bubble::Bubble() {
 
 //--------------------------------------------------------------
 void ofApp::setup() {
-	//Camera stuff
+	// Camera setup
 	camWidth = 1280;
 	camHeight = 720;
 
@@ -30,6 +30,7 @@ void ofApp::setup() {
 	forDrawing.allocate(camWidth, camHeight);
 	forDrawing.setFromPixels(vidGrabber.getPixelsRef());
 
+	// Sound setup
 	bubblePop1.load("pop1.wav");
 	bubblePop2.load("pop2.wav");
 	bubblePop2.setMultiPlay(true);
@@ -68,7 +69,9 @@ void ofApp::update() {
 
 		if (movementAmt > 10) {
 			bubbles.erase((bubbles.begin() + i));
-			bubblePop2.play();
+			if (randNum == 0) { bubblePop1.play(); }
+			else if (randNum == 1) { bubblePop2.play(); }
+			// bubblePop2.play();
 			--i; //make sure you don't skip over a bubble
 		} else {
 			bubbles[i].position.y += 3;
