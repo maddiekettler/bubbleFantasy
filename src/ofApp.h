@@ -2,7 +2,8 @@
 
 #include "ofMain.h"
 #include "ofxOpenCv.h"
-#include "ofxCvGrayscaleImage.h"
+
+// #define USE_TWO_SOUNDS  // uncomment to use two popping sounds instead of just one
 
 class Bubble {
 public:
