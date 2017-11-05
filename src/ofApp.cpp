@@ -10,58 +10,35 @@ Bubble::Bubble() {
 	color.g = 199;
 	color.b = 255;
 	radius = 30;
-	// variables usedful for isRemoved
-    //only calculated once at creation time
-//	leftX = position.x - (radius / 2);
-//	topY = position.y - (radius / 2);
-//	rightX = position.x + (radius / 2);
-//	bottomY = position.y + (radius / 2);
-}
-
-//determines whether bubble stays or goes
-//bool Bubble::isRemoved(ofxCvGrayscaleImage refImg, ofPixels pixels) {
-//	int movementAmt = 0;
-//	pixels = refImg.getPixels();
-//	for (int y = topY; y < bottomY; y++) {
-//		for (int x = leftX; x < rightX; x++) {
-//			// changed line of code: it seems to have a problem with y* width of ref img
-//			// because if it is just y + x, code runs fine
-//			// if (pixels.getColor((y*refImg.getWidth())+x).getLightness() > 150) {
-//			if (pixels.getColor(y+x).getLightness() > 150) {
-//				movementAmt++;
-//			}
-//		}
-//	}
-//	if (movementAmt > 5) {
-//		return true;
-//	}
-//	else {
-//		return false;
-//	}
-//}
 
 
 //--------------------------------------------------------------
 void ofApp::setup() {
-	camWidth = ofGetWidth();
-	camHeight = ofGetHeight();
+	//Camera stuff
+	camWidth = 1280;
+	camHeight = 720;
 
 	vidGrabber.setVerbose(true);
 	vidGrabber.setDeviceID(0);
 	vidGrabber.setDesiredFrameRate(30);
-	vidGrabber.initGrabber(1280, 720);
+	vidGrabber.initGrabber(camWidth, camHeight);
 
-	colorImg.allocate(1280, 720);
-	previous.allocate(1280, 720);
-	current.allocate(1280, 720);
-	difference.allocate(1280, 720);
-	forDrawing.allocate(1280, 720);
+	colorImg.allocate(camWidth, camHeight);
+	previous.allocate(camWidth, camHeight);
+	current.allocate(camWidth, camHeight);
+	difference.allocate(camWidth, camHeight);
+	forDrawing.allocate(camWidth, camHeight);
 	forDrawing.setFromPixels(vidGrabber.getPixelsRef());
+
+	bubblePop1.load("pop1.wav");
+	bubblePop2.load("pop2.wav");
+	bubblePop2.setMultiPlay(true);
+	bubblePop2.setMultiPlay(true);
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
-	forDrawing.setFromPixels(vidGrabber.getPixelsRef());
+	// forDrawing.setFromPixels(vidGrabber.getPixelsRef());
 	colorImg.setFromPixels(vidGrabber.getPixelsRef());
 	previous = colorImg;
 	vidGrabber.update();
@@ -72,6 +49,8 @@ void ofApp::update() {
     difference.mirror(false, true);
     difference.flagImageChanged();
 
+	int randNum = (int)ofRandom(0, 2);
+
 	for (int i = 0; i < bubbles.size(); ++i) {
         int movementAmt = 0;
         pixels = difference.getPixels();
@@ -81,14 +60,15 @@ void ofApp::update() {
         float bottomY = bubbles[i].position.y + (bubbles[i].radius / 2);
         for (int y = topY; y < bottomY; y++) {
             for (int x = leftX; x < rightX; x++) {
-                if(pixels.getColor(x, y).getLightness() > 150) {
+                if(pixels.getColor(y, x).getLightness() > 150) {
                     movementAmt++;
                 }
             }
         }
 
-		if (movementAmt > 5) {
+		if (movementAmt > 10) {
 			bubbles.erase((bubbles.begin() + i));
+			bubblePop2.play();
 			--i; //make sure you don't skip over a bubble
 		}
 		else {
@@ -96,11 +76,13 @@ void ofApp::update() {
 		}
 	}
 
+	// erase the bubble if it falls off of the screen
 	for (int i = 0; i < bubbles.size(); ++i) {
-		if (bubbles[i].position.y > ofGetHeight()) {
+		if (bubbles[i].position.y > camHeight + 50) {
 			bubbles.erase((bubbles.begin() + i));
 		}
 	}
+	
 	updated = true;
 }
 
@@ -129,10 +111,10 @@ void ofApp::draw() {
 //    difference.draw(0,0, 320, 240);
 }
 
-//Spacebar clears the bubbles if you feel like it
+
+// Spacebar clears the bubbles
 void ofApp::keyPressed(int key) {
 	if (key == ' ') {
 		bubbles.clear();
 	}
 }
-

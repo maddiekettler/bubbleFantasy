@@ -11,9 +11,6 @@ public:
 	ofVec2f position;
 	ofColor color;
 	int radius;
-	int leftX, topY, rightX, bottomY;
-
-	bool isRemoved(ofxCvGrayscaleImage refImg, ofPixels pixels);
 };
 
 class ofApp : public ofBaseApp {
@@ -35,4 +32,8 @@ public:
 	ofxCvGrayscaleImage current, previous, difference;
 
 	ofPixels pixels;
+
+	// let there be sound
+	ofSoundPlayer bubblePop1;
+	ofSoundPlayer bubblePop2;
 };
