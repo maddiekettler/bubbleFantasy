@@ -3,6 +3,7 @@
 Project 2 for ARTS 4090: Art & Code & Interactivity at Rensselaer Polytechnic
 Institute
 Instructor: Shawn Lawson
+Code written using the openFrameworks toolkit for C++
 
 ## About
 
@@ -21,14 +22,18 @@ similar approach with my program.
 
 ## In Progress
 
-Unfortunately, while some of the bubbles pop when they're supposed to (when there
-is movement in the space the bubble occupies), others will refuse to pop. I will
-continue debugging and wondering why my code likes making my life harder than it
-needs to be.
+Progress has been made, as the program more accurately removes the bubbles. I
+am struggling, however, as an access violation will get thrown after the program
+has run successfully for some time. I am continuing to look into this issue and
+trying to figure out why it happens.
+
+I have added sound to my program, so a popping noise will accompany the bubble
+as it is popped. As I continue to work on this I would also like to add a drawing
+of a popped bubble when the bubble is popped.
 
 ## Title
 
-In keeping with the music theme of project names, bubbleFantasy is a play on
-John Lennon and Yoko Ono's album _Double Fantasy_, originally released 17
+In keeping with the music theme of project names, bubbleFantasy is a (not so good)
+play on John Lennon and Yoko Ono's album _Double Fantasy_, originally released 17
 November 1980. Lennon would be murdered exactly three weeks later on 8 December
 1980.
