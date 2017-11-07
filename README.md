@@ -22,11 +22,6 @@ similar approach with my program.
 
 ## In Progress
 
-Progress has been made, as the program more accurately removes the bubbles. I
-am struggling, however, as an access violation will get thrown after the program
-has run successfully for some time. I am continuing to look into this issue and
-trying to figure out why it happens.
-
 I have added sound to my program, so a popping noise will accompany the bubble
 as it is popped. As I continue to work on this I would also like to add a drawing
 of a popped bubble when the bubble is popped.
