@@ -71,12 +71,15 @@ void ofApp::update() {
 		// search the bounds of each bubble
         for (int y = topY; y < bottomY; y++) {
             for (int x = leftX; x < rightX; x++) {
-			// if the lightness of the pixel is greater than 150 (not black)
-			/* NOTE: originally was pixels.getColor(x, y) but immediately throws an
-			access violation on my computer. Changing it to (y, x) helps temporarily */
-                if(pixels.getColor(y, x).getLightness() > 150) {
-                    movementAmt++;
-                }
+			// make sure the bubble's x and y are within the bounds of the image
+				if (y > 0 && y < difference.getHeight()) {
+					if (x > 0 && x < difference.getWidth()) {
+						// if the lightness of the pixel is greater than 150 (not black)
+						if (pixels.getColor(x, y).getLightness() > 150) {
+							movementAmt++;
+						}
+					}
+				}
             }
         }
 		// we want to make sure there was a substantial amount of movement by the bubble
