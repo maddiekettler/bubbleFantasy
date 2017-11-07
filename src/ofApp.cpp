@@ -54,7 +54,7 @@ void ofApp::update() {
 	// grayscale color image
 	current = colorImg;
 	// get absolute difference
-	// (change between previous and current will be white, unchanged will be black
+	// (change between previous and current will be white, unchanged will be black)
 	difference.absDiff(current, previous);
 	// thresholding image increases contrast
 	difference.threshold(30);
